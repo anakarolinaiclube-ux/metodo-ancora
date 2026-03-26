@@ -1,614 +1,1033 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Minha Área — Curso Montador de Móveis</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Fontes usadas na página de vendas -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome para os ícones -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Método Âncora – Pare de Fumar Sem Esforço</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080808;
+  --surface: #101010;
+  --surface2: #161616;
+  --gold: #c8a84b;
+  --gold-light: #e5c870;
+  --gold-dim: rgba(200,168,75,0.10);
+  --gold-border: rgba(200,168,75,0.20);
+  --gold-border-strong: rgba(200,168,75,0.55);
+  --text: #edeae4;
+  --muted: #6a6a6a;
+  --muted2: #999;
+  --green: #52b788;
+  --danger: #d95f5f;
+}
 
-    <style>
-        :root {
-            --bg-dark:       #0b1120;
-            --bg-card:       #1e293b;
-            --bg-card-hover: #334155;
-            --border-color:  #334155;
-            --orange:        #f97316;
-            --orange-dark:   #ea580c;
-            --orange-soft:   rgba(249, 115, 22, 0.1);
-            --green:         #10b981;
-            --green-dark:    #059669;
-            --green-soft:    rgba(16, 185, 129, 0.1);
-            --text-main:     #f8fafc;
-            --text-muted:    #94a3b8;
-            --text-light:    #cbd5e1;
-            
-            --font-title:    'Poppins', sans-serif;
-            --font-body:     'Inter', sans-serif;
-            
-            --radius-sm:     8px;
-            --radius-md:     12px;
-            --radius-lg:     16px;
-        }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+}
 
-        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-        html { scroll-behavior: smooth; }
+.hidden{display:none!important}
 
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+/* ── GRAIN ── */
+body::after{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.6;
+}
 
-        h1, h2, h3, h4 { font-family: var(--font-title); line-height: 1.2; }
-        a { text-decoration: none; color: inherit; }
+/* ── LAYOUT ── */
+.wrap{max-width:660px;margin:0 auto;padding:0 22px}
+.wrap-wide{max-width:920px;margin:0 auto;padding:0 22px}
 
-        .container {
-            width: 100%;
-            max-width: 1060px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+/* ── BUTTONS ── */
+.btn-cta{
+  display:block;width:100%;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);
+  color:#060606;
+  font-family:'DM Sans',sans-serif;
+  font-weight:700;font-size:16px;
+  letter-spacing:.05em;text-transform:uppercase;
+  padding:20px 32px;border-radius:5px;
+  border:none;cursor:pointer;text-decoration:none;
+  text-align:center;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 0 48px rgba(200,168,75,.3);
+  position:relative;overflow:hidden;
+}
+.btn-cta::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 50%,rgba(255,255,255,.1) 100%);
+}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 10px 60px rgba(200,168,75,.45)}
+.btn-sub{display:block;text-align:center;font-size:11px;color:var(--muted2);margin-top:12px;letter-spacing:.03em}
 
-        /* ── HEADER ── */
-        header {
-            background: rgba(11, 17, 32, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 16px 0;
-        }
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-family: var(--font-title);
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--text-main);
-            letter-spacing: -0.5px;
-        }
-        .logo span { color: var(--orange); }
-        
-        .header-right { display: flex; align-items: center; gap: 14px; }
-        .avatar {
-            width: 42px; height: 42px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--orange), var(--orange-dark));
-            color: var(--text-main);
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--font-title); font-size: 1.1rem; font-weight: 700;
-            border: 2px solid var(--bg-card);
-            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
-        }
-        .header-name { font-size: 0.9rem; font-weight: 600; color: var(--text-light); }
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulseGold{0%,100%{box-shadow:0 0 0 0 rgba(200,168,75,.35)}60%{box-shadow:0 0 0 10px rgba(200,168,75,0)}}
 
-        /* ── MAIN ── */
-        main { padding: 48px 0 100px; }
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
+.reveal.on{opacity:1;transform:none}
 
-        .welcome-header { margin-bottom: 40px; text-align: left; }
-        .welcome-header h1 {
-            font-size: clamp(2rem, 5vw, 2.8rem);
-            font-weight: 800;
-            color: var(--text-main);
-            margin-bottom: 8px;
-            letter-spacing: -1px;
-        }
-        .welcome-header h1 span {
-            background: linear-gradient(to right, var(--orange), #facc15);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .welcome-header p { font-size: 1.1rem; color: var(--text-muted); font-weight: 400; }
+/* ══════════════════════════════════
+   ████  QUIZ  ████
+══════════════════════════════════ */
+#quiz-wrap{
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:44px 0 80px;
+  background:
+    radial-gradient(ellipse 65% 45% at 50% -5%, rgba(200,168,75,.09) 0%, transparent 65%);
+}
 
-        /* ── CARD PROGRESSO ── */
-        .progress-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            padding: 36px 40px;
-            margin-bottom: 48px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        }
-        .progress-card::before {
-            content: ''; position: absolute; top: -100px; right: -50px;
-            width: 300px; height: 300px; border-radius: 50%;
-            background: var(--orange); filter: blur(100px); opacity: 0.1; pointer-events: none;
-        }
-        
-        .progress-top {
-            display: flex; justify-content: space-between; align-items: flex-end;
-            margin-bottom: 24px; position: relative; z-index: 2; flex-wrap: wrap; gap: 20px;
-        }
-        .progress-top h3 { font-size: 1.6rem; color: var(--text-main); margin-bottom: 4px; }
-        .progress-subtitle { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
-        .progress-percent { font-family: var(--font-title); font-size: 3.5rem; font-weight: 800; color: var(--orange); line-height: 1; letter-spacing: -2px; }
-        
-        .progress-bar-wrap {
-            width: 100%; height: 10px; background: rgba(0, 0, 0, 0.4);
-            border-radius: 5px; margin-bottom: 32px; position: relative; z-index: 2;
-            overflow: hidden; border: 1px solid rgba(255,255,255,0.05);
-        }
-        .progress-bar-fill {
-            height: 100%; background: linear-gradient(90deg, var(--orange-dark), var(--orange));
-            border-radius: 5px; width: 0%; transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
-            position: relative;
-        }
-        .progress-bar-fill::after {
-            content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shine 2s infinite;
-        }
-        @keyframes shine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+.brand-mark{
+  font-family:'Cormorant Garamond',serif;
+  font-size:11px;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--gold);opacity:.75;margin-bottom:44px;text-align:center;
+}
 
-        /* Mapa de Módulos (Topicos) */
-        .module-map {
-            display: flex; justify-content: space-between; position: relative; z-index: 2;
-        }
-        .mod-step {
-            display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 1; position: relative;
-        }
-        .mod-step:not(:last-child)::after {
-            content: ''; position: absolute; top: 16px; left: 50%; width: 100%;
-            height: 2px; background: var(--border-color); z-index: -1;
-        }
-        .mod-circle {
-            width: 34px; height: 34px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.85rem; font-weight: 700; background: var(--bg-dark);
-            color: var(--text-muted); border: 2px solid var(--border-color);
-            transition: all 0.35s ease;
-        }
-        .mod-circle.completed {
-            background: var(--green); color: var(--text-main); border-color: var(--green);
-            box-shadow: 0 0 16px rgba(16, 185, 129, 0.4); transform: scale(1.15);
-        }
-        .mod-label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+.quiz-body{width:100%;max-width:540px;padding:0 22px}
 
-        /* ── SEÇÕES (ACORDEÕES) ── */
-        .phase-header {
-            display: flex; align-items: center; gap: 16px; margin: 40px 0 0; padding: 20px 24px;
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);
-            cursor: pointer; transition: all 0.25s ease; user-select: none; position: relative;
-        }
-        .phase-header:hover { border-color: var(--orange); background: var(--bg-card-hover); }
-        .phase-header.open { border-color: var(--orange); border-bottom-left-radius: 0; border-bottom-right-radius: 0; border-bottom-color: transparent; }
-        
-        .phase-chevron { margin-left: auto; color: var(--text-muted); font-size: 0.9rem; transition: transform 0.3s ease; flex-shrink: 0; }
-        .phase-header.open .phase-chevron { transform: rotate(180deg); color: var(--orange); }
-        .phase-progress-mini { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; white-space: nowrap; }
-        .phase-progress-mini.all-done { color: var(--green); }
+/* Progress */
+.prog-wrap{margin-bottom:38px}
+.prog-meta{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:9px;letter-spacing:.04em}
+.prog-bg{height:2px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:99px;transition:width .55s cubic-bezier(.4,0,.2,1)}
 
-        .phase-body {
-            display: none; border: 1px solid var(--orange); border-top: none;
-            border-bottom-left-radius: var(--radius-md); border-bottom-right-radius: var(--radius-md);
-            padding: 24px; background: rgba(30, 41, 59, 0.4); margin-bottom: 0;
-        }
-        .phase-body.open { display: block; }
-        
-        .phase-badge {
-            display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem;
-            font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 30px;
-            background: var(--bg-dark); color: var(--text-light); border: 1px solid var(--border-color);
-        }
-        .phase-name { font-family: var(--font-title); font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+/* Slides */
+.qslide{display:none;flex-direction:column;animation:slideIn .38s ease both}
+.qslide.on{display:flex}
 
-        /* ── CARDS DOS MÓDULOS ── */
-        .days-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .day-card {
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-md);
-            padding: 28px 24px; display: flex; flex-direction: column; transition: all 0.3s ease; position: relative;
-        }
-        .day-card:hover { transform: translateY(-4px); border-color: var(--orange); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .day-card.is-done { border-color: var(--green); background: rgba(16, 185, 129, 0.05); }
-        
-        .day-card-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
-        .day-icon {
-            width: 48px; height: 48px; border-radius: var(--radius-sm);
-            background: var(--bg-dark); color: var(--orange); border: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
-        }
-        .day-card.is-done .day-icon { background: var(--green-soft); color: var(--green); border-color: var(--green); }
-        
-        .day-num { font-family: var(--font-title); font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
-        .day-card.is-done .day-num { color: var(--green); }
-        .day-title { font-family: var(--font-title); font-size: 1.15rem; font-weight: 700; color: var(--text-main); line-height: 1.3; }
-        .day-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; flex-grow: 1; margin-bottom: 24px; }
-        
-        .card-actions { display: flex; flex-direction: column; gap: 10px; margin-top: auto; }
-        .btn-access {
-            background: var(--orange); color: #fff; padding: 12px 16px; border-radius: var(--radius-sm);
-            font-family: var(--font-title); font-weight: 600; font-size: 0.9rem; text-align: center;
-            transition: all 0.25s; display: block; border: none;
-        }
-        .btn-access:hover { background: var(--orange-dark); transform: translateY(-2px); }
-        
-        .btn-complete {
-            background: transparent; color: var(--text-muted); border: 1px solid var(--border-color);
-            padding: 10px 16px; border-radius: var(--radius-sm); font-family: var(--font-body); font-weight: 600; font-size: 0.85rem;
-            cursor: pointer; transition: all 0.25s; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
-        }
-        .btn-complete:hover { border-color: var(--orange); color: var(--orange); background: rgba(249,115,22,0.05); }
-        .btn-complete.is-completed { background: var(--green-soft); color: var(--green); border-color: var(--green); }
+.q-tag{
+  display:inline-block;align-self:flex-start;
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);background:var(--gold-dim);
+  border:1px solid var(--gold-border);
+  padding:5px 14px;border-radius:99px;margin-bottom:18px;
+}
+.q-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,8vw,54px);
+  font-weight:600;line-height:1.12;margin-bottom:8px;
+}
+.q-title em{font-style:italic;color:var(--gold)}
+.q-hint{font-size:13px;color:var(--muted2);margin-bottom:30px;line-height:1.65}
 
-        /* ── RECURSOS EXTRAS (BÔNUS / APP) ── */
-        .extras-section { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border-color); }
-        .section-title { font-family: var(--font-title); font-size: 1.8rem; color: var(--text-main); margin-bottom: 24px; text-align: left; }
-        .section-title span { color: var(--orange); }
-        
-        .extras-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
-        .extra-card {
-            background: linear-gradient(145deg, var(--bg-card) 0%, rgba(249,115,22,0.05) 100%);
-            border: 1px solid var(--orange); border-radius: var(--radius-md);
-            padding: 32px 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; flex-direction: column;
-            transition: all 0.3s ease; align-items: flex-start;
-        }
-        .extra-card:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(249, 115, 22, 0.15); }
-        
-        .extra-icon {
-            width: 54px; height: 54px; border-radius: 12px;
-            background: var(--orange); color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(249, 115, 22, 0.4);
-        }
-        .extra-tag { font-family: var(--font-title); font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--orange); margin-bottom: 6px; }
-        .extra-title { font-family: var(--font-title); font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 10px; }
-        .extra-desc { font-size: 0.9rem; color: var(--text-light); line-height: 1.5; margin-bottom: 24px; flex-grow: 1; }
-        
-        .btn-extra {
-            background: var(--bg-dark); color: var(--orange); border: 1px solid var(--orange);
-            padding: 12px 24px; border-radius: var(--radius-sm); font-weight: 600; font-size: 0.9rem; transition: all 0.25s; width: 100%; text-align: center;
-        }
-        .btn-extra:hover { background: var(--orange); color: #fff; }
+/* Name input */
+.name-input{
+  width:100%;background:var(--surface);
+  border:1px solid var(--gold-border);border-radius:8px;
+  padding:17px 20px;color:var(--text);
+  font-family:'DM Sans',sans-serif;font-size:16px;
+  outline:none;margin-bottom:18px;
+  transition:border-color .2s;
+}
+.name-input:focus{border-color:var(--gold-border-strong)}
+.name-input::placeholder{color:var(--muted)}
 
-        /* ── FOOTER ── */
-        footer { text-align: center; padding: 32px 0; border-top: 1px solid var(--border-color); margin-top: 64px; }
-        footer p { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
+/* Options */
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{
+  background:var(--surface);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;padding:17px 18px;
+  cursor:pointer;display:flex;align-items:center;gap:14px;
+  text-align:left;
+  transition:border-color .18s,background .18s,transform .14s;
+}
+.opt:hover{border-color:var(--gold-border-strong);background:var(--gold-dim);transform:translateX(4px)}
+.opt.sel{border-color:var(--gold-border-strong);background:var(--gold-dim)}
+.opt-ico{font-size:19px;flex-shrink:0;width:26px;text-align:center}
+.opt-lbl{font-size:14px;font-weight:400;line-height:1.4;flex:1;color:var(--text)}
+.opt-chk{
+  margin-left:auto;flex-shrink:0;
+  width:20px;height:20px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;color:transparent;transition:all .2s;
+}
+.opt.sel .opt-chk{background:var(--gold);border-color:var(--gold);color:#060606;font-weight:700}
 
-        /* ── AJUSTES MOBILE EXCLUSIVOS ── */
-        @media (max-width: 768px) {
-            .container { padding: 0 16px; }
-            main { padding: 32px 0 80px; }
-            
-            .welcome-header h1 { font-size: 1.8rem; }
-            .welcome-header p { font-size: 1rem; }
-            
-            .progress-card { padding: 24px 20px; margin-bottom: 32px; }
-            .progress-top h3 { font-size: 1.4rem; }
-            .progress-percent { font-size: 2.5rem; }
-            
-            .module-map { overflow-x: auto; padding-bottom: 10px; gap: 8px; justify-content: flex-start; }
-            .mod-step { min-width: 50px; flex: none; }
-            .mod-step::after { display: none; }
-            .mod-circle { width: 32px; height: 32px; font-size: 0.8rem; border-width: 1.5px; }
-            .mod-label { font-size: 0.65rem; }
-            
-            /* Cabeçalho do Acordeão otimizado */
-            .phase-header {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 16px;
-                gap: 8px;
-            }
-            .phase-chevron { position: absolute; top: 20px; right: 20px; margin: 0; }
-            .phase-name { font-size: 1.1rem; padding-right: 24px; line-height: 1.3; }
-            .phase-progress-mini { margin-top: 4px; font-size: 0.85rem; }
-            
-            .day-card { padding: 24px 20px; }
-            .extra-card { padding: 24px 20px; }
-        }
-    </style>
+/* Next btn */
+.btn-next{
+  margin-top:22px;opacity:0;pointer-events:none;
+  transition:opacity .28s,transform .2s,box-shadow .2s;
+}
+.btn-next.show{opacity:1;pointer-events:all;animation:fadeUp .28s ease both}
+
+/* ══════════════════════════════════
+   ████  LOADING  ████
+══════════════════════════════════ */
+#loading-wrap{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;padding:40px 22px;
+}
+.loader-ring{
+  width:56px;height:56px;
+  border:2px solid rgba(200,168,75,.08);
+  border-top-color:var(--gold);
+  border-radius:50%;animation:spin 1.1s linear infinite;
+  margin:0 auto 30px;
+}
+.load-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:22px;color:var(--gold);text-align:center;margin-bottom:8px;
+}
+.load-sub{font-size:12px;color:var(--muted);text-align:center;margin-bottom:32px}
+.load-steps{display:flex;flex-direction:column;gap:11px;max-width:320px}
+.load-step{
+  display:flex;align-items:center;gap:12px;
+  font-size:13px;color:var(--muted);
+  opacity:0;transition:opacity .4s,color .4s;
+}
+.load-step.done{opacity:1;color:var(--text)}
+.load-dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.1);flex-shrink:0;transition:background .4s}
+.load-step.done .load-dot{background:var(--green)}
+
+/* ══════════════════════════════════
+   ████  LANDING PAGE  ████
+══════════════════════════════════ */
+#lp-wrap{display:none}
+
+/* ── TOP BAR ── */
+.topbar{
+  background:linear-gradient(90deg,#9a7a28,var(--gold),#9a7a28);
+  color:#060606;text-align:center;
+  padding:10px 20px;font-size:12px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+
+/* ── HERO ── */
+.hero{
+  padding:72px 0 64px;text-align:center;
+  background:radial-gradient(ellipse 75% 55% at 50% 0%,rgba(200,168,75,.11) 0%,transparent 65%);
+}
+.hero-tag{
+  display:inline-block;
+  border:1px solid var(--gold-border);color:var(--gold);
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  padding:6px 18px;border-radius:99px;margin-bottom:26px;
+  animation:fadeUp .5s ease both;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(38px,7vw,68px);
+  font-weight:700;line-height:1.05;
+  max-width:640px;margin:0 auto;
+  animation:fadeUp .6s .08s ease both;
+}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{
+  font-size:clamp(15px,2.5vw,18px);color:#aaa;
+  max-width:480px;margin:22px auto 0;
+  animation:fadeUp .6s .16s ease both;line-height:1.7;
+}
+.hero-cta{margin-top:40px;max-width:420px;margin-left:auto;margin-right:auto;animation:fadeUp .6s .24s ease both}
+
+/* ── DIVIDER ── */
+.divider{
+  display:flex;align-items:center;gap:16px;
+  margin:56px 0 0;
+}
+.divider-line{flex:1;height:1px;background:rgba(255,255,255,.06)}
+.divider-ico{font-size:18px;opacity:.4}
+
+/* ── SECTION SHARED ── */
+.sec{padding:72px 0}
+.sec-dark{background:var(--surface)}
+.sec-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,5vw,48px);font-weight:700;line-height:1.12;
+}
+.sec-title em{font-style:italic;color:var(--gold)}
+.sec-body{font-size:14px;color:var(--muted2);line-height:1.8;margin-top:14px;max-width:540px}
+
+/* ── HOOK / DOR ── */
+.pain-list{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+.pain-item{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--surface2);border:1px solid rgba(255,255,255,.06);
+  border-radius:10px;padding:18px 20px;
+}
+.pain-x{color:var(--danger);font-size:18px;flex-shrink:0;margin-top:1px}
+.pain-item p{font-size:14px;color:#bbb;line-height:1.55}
+.pain-item strong{color:var(--text);font-weight:500}
+
+.truth-box{
+  margin-top:36px;
+  border-left:2px solid var(--gold);
+  padding:20px 24px;
+  background:var(--gold-dim);
+  border-radius:0 8px 8px 0;
+}
+.truth-box p{font-size:15px;color:var(--text);line-height:1.75}
+.truth-box strong{color:var(--gold);font-weight:600}
+
+/* ── MECANISMO ── */
+.mec-intro{
+  background:var(--surface2);
+  border:1px solid var(--gold-border);
+  border-radius:12px;padding:28px;margin-top:36px;
+}
+.mec-intro-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.mec-intro p{font-size:14px;color:#ccc;line-height:1.8}
+
+.mec-blocks{margin-top:36px;display:flex;flex-direction:column;gap:0}
+.mec-block{
+  display:flex;gap:0;
+  border-bottom:1px solid rgba(255,255,255,.05);
+  padding:28px 0;
+}
+.mec-block:last-child{border-bottom:none}
+.mec-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:48px;font-weight:700;color:rgba(200,168,75,.15);
+  width:60px;flex-shrink:0;line-height:1;padding-top:4px;
+}
+.mec-content h3{font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text)}
+.mec-content p{font-size:13px;color:var(--muted2);line-height:1.8}
+.mec-content .highlight{
+  display:inline-block;
+  background:var(--gold-dim);border:1px solid var(--gold-border);
+  color:var(--gold);font-size:12px;font-weight:500;
+  padding:3px 12px;border-radius:99px;margin-top:10px;
+}
+
+.science-note{
+  margin-top:32px;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;padding:22px 24px;
+  background:var(--surface2);
+  display:flex;gap:16px;align-items:flex-start;
+}
+.science-ico{font-size:22px;flex-shrink:0;margin-top:2px}
+.science-note p{font-size:13px;color:var(--muted2);line-height:1.8}
+.science-note strong{color:var(--text);font-weight:500}
+
+/* comparativo */
+.compare-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  margin-top:32px;
+}
+.cmp-card{
+  border-radius:10px;padding:22px 18px;
+  border:1px solid rgba(255,255,255,.07);
+}
+.cmp-card.bad{background:rgba(217,95,95,.06);border-color:rgba(217,95,95,.2)}
+.cmp-card.good{background:var(--gold-dim);border-color:var(--gold-border)}
+.cmp-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px;font-weight:600}
+.cmp-card.bad .cmp-label{color:var(--danger)}
+.cmp-card.good .cmp-label{color:var(--gold)}
+.cmp-list{display:flex;flex-direction:column;gap:8px}
+.cmp-item{font-size:12px;color:#aaa;display:flex;gap:8px;align-items:flex-start;line-height:1.5}
+.cmp-ico{flex-shrink:0;margin-top:1px}
+
+/* ── DEPOIMENTOS ── */
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:40px}
+.testi{
+  background:var(--surface2);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;padding:26px;
+  transition:border-color .2s,transform .2s;
+}
+.testi:hover{border-color:var(--gold-border);transform:translateY(-3px)}
+.testi-stars{color:var(--gold);letter-spacing:3px;font-size:12px;margin-bottom:14px}
+.testi-text{font-size:13px;color:#bbb;line-height:1.75;margin-bottom:18px;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:11px}
+.testi-av{
+  width:34px;height:34px;border-radius:50%;flex-shrink:0;
+  background:var(--gold-dim);border:1px solid var(--gold-border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--gold);font-weight:700;
+}
+.testi-name{font-size:13px;font-weight:500}
+.testi-detail{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ── GARANTIA ── */
+.guarantee{
+  border:1px solid var(--gold-border);
+  border-radius:14px;padding:36px;margin-top:40px;
+  background:var(--gold-dim);
+  display:flex;gap:22px;align-items:flex-start;
+}
+.guar-ico{font-size:42px;flex-shrink:0}
+.guar-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;margin-bottom:10px}
+.guar-body{font-size:13px;color:#bbb;line-height:1.8}
+
+/* ── OFERTA ── */
+.offer-box{
+  border:1px solid var(--gold-border);border-radius:16px;
+  padding:44px 36px;text-align:center;
+  background:var(--surface);position:relative;overflow:hidden;
+}
+.offer-box::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(200,168,75,.08) 0%,transparent 65%);
+  pointer-events:none;
+}
+.offer-badge{
+  display:inline-block;
+  background:rgba(217,95,95,.1);border:1px solid rgba(217,95,95,.3);
+  color:var(--danger);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 18px;border-radius:99px;margin-bottom:24px;
+  animation:pulseGold 2.8s infinite;
+}
+.offer-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4.5vw,40px);font-weight:700;margin-bottom:28px;
+}
+.price-from{text-decoration:line-through;color:var(--muted);font-size:15px;margin-bottom:4px}
+.price-main{
+  font-family:'Cormorant Garamond',serif;
+  font-size:84px;font-weight:700;color:var(--gold);line-height:1;
+}
+.price-main sup{font-size:26px;vertical-align:super;font-family:'DM Sans',sans-serif;font-weight:300}
+.price-main span{font-size:36px}
+.price-note{font-size:12px;color:var(--muted);margin-top:6px;margin-bottom:32px}
+
+.includes{display:flex;flex-direction:column;gap:11px;text-align:left;max-width:440px;margin:28px auto}
+.inc-item{display:flex;gap:13px;font-size:13px;color:#ccc;line-height:1.5}
+.inc-chk{color:var(--green);font-size:15px;flex-shrink:0;margin-top:1px}
+.inc-item strong{color:var(--text);font-weight:500}
+
+/* ── FAQ ── */
+.faq-list{margin-top:38px}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.06)}
+.faq-q{
+  width:100%;background:none;border:none;color:var(--text);
+  text-align:left;padding:20px 0;cursor:pointer;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;
+  transition:color .2s;
+}
+.faq-q:hover{color:var(--gold)}
+.faq-arr{color:var(--gold);font-size:22px;flex-shrink:0;transition:transform .3s;font-family:'Cormorant Garamond',serif;font-weight:300}
+.faq-item.open .faq-arr{transform:rotate(45deg)}
+.faq-a{display:none;font-size:13px;color:var(--muted2);line-height:1.8;padding-bottom:20px}
+.faq-item.open .faq-a{display:block}
+
+/* ── FINAL CTA ── */
+.final-hero{
+  padding:88px 0;text-align:center;
+  background:radial-gradient(ellipse 70% 60% at 50% 100%,rgba(200,168,75,.1) 0%,transparent 65%);
+}
+.final-hero .sec-title{font-size:clamp(32px,5.5vw,52px)}
+
+/* ── STICKY ── */
+.sticky{
+  position:fixed;bottom:0;left:0;right:0;
+  background:rgba(6,6,6,.97);backdrop-filter:blur(12px);
+  border-top:1px solid var(--gold-border);
+  padding:13px 20px;display:none;z-index:100;
+  align-items:center;justify-content:space-between;gap:14px;
+}
+.sticky.on{display:flex}
+.sticky-left{font-size:12px;color:var(--muted2)}
+.sticky-left strong{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--gold);display:block;font-weight:700}
+.sticky .btn-cta{width:auto;padding:14px 26px;font-size:13px}
+
+@media(max-width:500px){
+  .compare-grid{grid-template-columns:1fr}
+  .guarantee{flex-direction:column}
+  .sticky{flex-direction:column;text-align:center}
+  .sticky-left{display:none}
+  .sticky .btn-cta{width:100%}
+  .offer-box{padding:32px 20px}
+}
+
+/* ── TELA DE SELEÇÃO ── */
+#selected-screen{
+  min-height:100vh;display:none;flex-direction:column;
+  align-items:center;justify-content:center;padding:40px 22px;
+  background:radial-gradient(ellipse 70% 55% at 50% 40%, rgba(200,168,75,.13) 0%, transparent 65%);
+  text-align:center;
+}
+#selected-screen.on{display:flex}
+.sel-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gold-dim);border:1px solid var(--gold-border-strong);
+  color:var(--gold);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  padding:8px 20px;border-radius:99px;margin-bottom:32px;
+  animation:fadeUp .5s ease both;
+}
+.sel-badge-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulseGold 1.8s infinite}
+.sel-number{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(72px,18vw,120px);font-weight:700;
+  color:var(--gold);line-height:1;
+  animation:fadeUp .5s .1s ease both;
+  text-shadow:0 0 60px rgba(200,168,75,.3);
+}
+.sel-of{font-size:clamp(16px,4vw,22px);color:var(--muted2);margin-top:4px;animation:fadeUp .5s .15s ease both}
+.sel-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,6vw,44px);font-weight:700;line-height:1.15;
+  margin-top:24px;animation:fadeUp .5s .2s ease both;
+}
+.sel-title em{font-style:italic;color:var(--gold)}
+.sel-sub{
+  font-size:14px;color:var(--muted2);line-height:1.75;
+  max-width:400px;margin:16px auto 0;animation:fadeUp .5s .25s ease both;
+}
+.sel-divider{
+  width:48px;height:1px;background:var(--gold-border-strong);
+  margin:28px auto;animation:fadeUp .5s .3s ease both;
+}
+.sel-cta-label{font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;animation:fadeUp .5s .35s ease both}
+.sel-bar{
+  width:260px;height:3px;background:rgba(255,255,255,.07);
+  border-radius:99px;overflow:hidden;margin:0 auto;
+  animation:fadeUp .5s .4s ease both;
+}
+.sel-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:99px;width:0%;transition:width 5s linear}
+
+</style>
 </head>
 <body>
 
-    <!-- ── HEADER ── -->
-    <header>
-        <div class="container">
-            <div class="header-inner">
-                <div class="logo">Montador<span>PRO</span></div>
-                <div class="header-right">
-                    <span class="header-name">Painel do Aluno</span>
-                    <div class="avatar">
-                        <i class="fas fa-tools" style="font-size: 16px;"></i>
-                    </div>
-                </div>
-            </div>
+<!-- ════════════════════════
+     QUIZ
+════════════════════════ -->
+<div id="quiz-wrap">
+  <div class="brand-mark">Método Âncora</div>
+  <div class="quiz-body">
+
+    <div class="prog-wrap" id="progWrap" style="display:none">
+      <div class="prog-meta">
+        <span id="progLabel">Etapa 1 de 4</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="prog-bg"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+    </div>
+
+    <!-- NOME -->
+    <div class="qslide on" id="sl-name">
+      <h2 class="q-title serif"><em>Qual é o seu nome?</em></h2>
+      <p class="q-hint">Digite seu primeiro nome para personalizarmos seu protocolo.</p>
+      <input type="text" class="name-input" id="userName" placeholder="Ex: João" autocomplete="given-name">
+      <button class="btn-cta" onclick="handleName()">Iniciar diagnóstico →</button>
+    </div>
+
+    <!-- Q1 -->
+    <div class="qslide" id="sl-0">
+      <div class="q-tag">Seu histórico</div>
+      <h2 class="q-title serif">Há quanto tempo o álcool<br>faz parte da sua <em>rotina?</em></h2>
+      <p class="q-hint">Isso define qual camada do protocolo precisa de mais atenção.</p>
+      <div class="opts">
+        <div class="opt" data-s="0" data-v="a"><div class="opt-ico">🌱</div><div class="opt-lbl">Menos de 2 anos</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="0" data-v="b"><div class="opt-ico">📅</div><div class="opt-lbl">Entre 2 e 10 anos</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="0" data-v="c"><div class="opt-ico">🔒</div><div class="opt-lbl">Mais de 10 anos</div><div class="opt-chk">✓</div></div>
+      </div>
+      <button class="btn-cta btn-next" id="nx-0">Continuar →</button>
+    </div>
+
+    <!-- Q2 -->
+    <div class="qslide" id="sl-1">
+      <div class="q-tag">Seus gatilhos</div>
+      <h2 class="q-title serif">Quando a vontade de<br>beber é mais <em>intensa?</em></h2>
+      <p class="q-hint">Esse é o gatilho que o protocolo vai trabalhar primeiro.</p>
+      <div class="opts">
+        <div class="opt" data-s="1" data-v="a"><div class="opt-ico">😰</div><div class="opt-lbl">Estresse ou ansiedade</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="1" data-v="b"><div class="opt-ico">☕</div><div class="opt-lbl">Final de expediente ou fim de semana</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="1" data-v="c"><div class="opt-ico">🍻</div><div class="opt-lbl">Situações sociais (festas, bares, reuniões)</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="1" data-v="d"><div class="opt-ico">😔</div><div class="opt-lbl">Tédio, solidão ou tristeza</div><div class="opt-chk">✓</div></div>
+      </div>
+      <button class="btn-cta btn-next" id="nx-1">Continuar →</button>
+    </div>
+
+    <!-- Q3 -->
+    <div class="qslide" id="sl-2">
+      <div class="q-tag">Suas tentativas</div>
+      <h2 class="q-title serif">O que aconteceu quando<br>você tentou <em>reduzir antes?</em></h2>
+      <p class="q-hint">A maioria de quem chega aqui já tentou ao menos uma vez.</p>
+      <div class="opts">
+        <div class="opt" data-s="2" data-v="a"><div class="opt-ico">🙅</div><div class="opt-lbl">Nunca tentei reduzir</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="2" data-v="b"><div class="opt-ico">💪</div><div class="opt-lbl">Tentei mas não consegui manter</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="2" data-v="c"><div class="opt-ico">🔁</div><div class="opt-lbl">Tentei várias vezes e sempre recaí</div><div class="opt-chk">✓</div></div>
+      </div>
+      <button class="btn-cta btn-next" id="nx-2">Continuar →</button>
+    </div>
+
+    <!-- Q4 -->
+    <div class="qslide" id="sl-3">
+      <div class="q-tag">Sua motivação</div>
+      <h2 class="q-title serif">Por que você quer<br><em>se libertar agora?</em></h2>
+      <p class="q-hint">Sua razão principal determina o foco emocional do protocolo.</p>
+      <div class="opts">
+        <div class="opt" data-s="3" data-v="a"><div class="opt-ico">❤️</div><div class="opt-lbl">Saúde — estou sentindo os efeitos no corpo</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="3" data-v="b"><div class="opt-ico">👨‍👩‍👧</div><div class="opt-lbl">Família — quero dar um exemplo melhor</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="3" data-v="c"><div class="opt-ico">💸</div><div class="opt-lbl">Dinheiro — cansado de gastar com isso</div><div class="opt-chk">✓</div></div>
+        <div class="opt" data-s="3" data-v="d"><div class="opt-ico">🏆</div><div class="opt-lbl">Orgulho — quero me provar que consigo</div><div class="opt-chk">✓</div></div>
+      </div>
+      <button class="btn-cta btn-next" id="nx-3">Ver meu resultado →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════════════════════
+     LOADING
+════════════════════════ -->
+<div id="loading-wrap" class="hidden">
+  <div class="load-inner" style="text-align:center">
+    <div class="loader-ring"></div>
+    <p class="load-title">Analisando respostas…</p>
+    <p class="load-sub" id="loadSub">Mapeando padrão de dependência</p>
+    <div class="load-steps" style="margin:0 auto">
+      <div class="load-step" id="ls1"><div class="load-dot"></div>Identificando padrão de consumo</div>
+      <div class="load-step" id="ls2"><div class="load-dot"></div>Mapeando âncoras emocionais</div>
+      <div class="load-step" id="ls3"><div class="load-dot"></div><span id="ls3txt">Calibrando protocolo…</span></div>
+      <div class="load-step" id="ls4"><div class="load-dot"></div>Preparando sequência de 7 dias</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════
+     TELA DE SELEÇÃO
+════════════════════════ -->
+<div id="selected-screen">
+  <div class="sel-badge"><div class="sel-badge-dot"></div>Vaga confirmada</div>
+  <div class="sel-number" id="selNum">1</div>
+  <p class="sel-of">de 15 protocolos disponíveis</p>
+  <h2 class="sel-title">Você faz parte dos <em>15</em><br>que terão acesso<br>com oferta especial.</h2>
+  <p class="sel-sub">Seu protocolo personalizado está pronto. Essa condição é exclusiva para quem completou o diagnóstico agora.</p>
+  <div class="sel-divider"></div>
+  <p class="sel-cta-label">Abrindo seu protocolo…</p>
+  <div class="sel-bar"><div class="sel-bar-fill" id="selBarFill"></div></div>
+</div>
+
+<!-- ════════════════════════
+     LANDING PAGE
+════════════════════════ -->
+<div id="lp-wrap">
+
+  <!-- TOP BAR -->
+  <div class="topbar">⚡ Protocolo gerado — vagas abertas por tempo limitado</div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="wrap">
+      <div class="hero-tag">Diagnóstico concluído · Resultado personalizado</div>
+      <h1 id="heroTitle">Seu cérebro ainda<br>acredita que <em>precisa</em><br>do álcool.</h1>
+      <p class="hero-sub">Não é falta de força de vontade. É uma instrução instalada no subconsciente — e o Método Âncora sabe exatamente como desfazê-la.</p>
+      <div class="hero-cta">
+        <a href="https://www.ggcheckout.com/checkout/v4/GimLqOi9HnEbfUSXcf2h" class="btn-cta">Quero Meu Acesso — R$ 16,90</a>
+        <span class="btn-sub">🔒 Pagamento seguro · Garantia de 7 dias · Acesso imediato</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEÇÃO 1: A DOR (Hook) ── -->
+  <div class="sec sec-dark">
+    <div class="wrap reveal">
+      <p class="sec-label">O problema real</p>
+      <h2 class="sec-title">Você não é <em>fraco.</em><br>A abordagem é que estava errada.</h2>
+      <p class="sec-body">Se força de vontade fosse suficiente, você já teria parado de beber. A verdade é que nenhuma dessas abordagens ataca o lugar certo:</p>
+
+      <div class="pain-list">
+        <div class="pain-item">
+          <div class="pain-x">✕</div>
+          <p><strong>Medicamentos e internações</strong> — tratam a dependência química temporariamente. Deixam o gatilho emocional completamente intacto. É por isso que a recaída acontece assim que o estresse aparece.</p>
         </div>
-    </header>
-
-    <!-- ── MAIN ── -->
-    <main>
-        <div class="container">
-
-            <!-- Boas-vindas -->
-            <div class="welcome-header">
-                <h1>Bem-vindo à <span>sua nova profissão.</span></h1>
-                <p>Acompanhe seu progresso e acesse as aulas e ferramentas exclusivas abaixo.</p>
-            </div>
-
-            <!-- ── CARD PROGRESSO ── -->
-            <div class="progress-card">
-                <div class="progress-top">
-                    <div>
-                        <h3>Seu Progresso</h3>
-                        <div class="progress-subtitle">Rumo à sua primeira montagem lucrativa</div>
-                    </div>
-                    <div class="progress-stats">
-                        <div class="progress-percent" id="progress-text">0%</div>
-                    </div>
-                </div>
-
-                <div class="progress-bar-wrap">
-                    <div class="progress-bar-fill" id="progress-bar"></div>
-                </div>
-
-                <!-- Mapa dos Módulos -->
-                <div class="module-map" id="module-map">
-                    <div class="mod-step"><div class="mod-circle" data-mod="1">1</div><div class="mod-label">Mod 1</div></div>
-                    <div class="mod-step"><div class="mod-circle" data-mod="2">2</div><div class="mod-label">Mod 2</div></div>
-                    <div class="mod-step"><div class="mod-circle" data-mod="3">3</div><div class="mod-label">Mod 3</div></div>
-                    <div class="mod-step"><div class="mod-circle" data-mod="4">4</div><div class="mod-label">Mod 4</div></div>
-                    <div class="mod-step"><div class="mod-circle" data-mod="5">5</div><div class="mod-label">Mod 5</div></div>
-                </div>
-            </div>
-
-            <!-- ── FASE 1: PREPARAÇÃO ── -->
-            <div class="phase-accordion">
-                <div class="phase-header" data-phase="1">
-                    <span class="phase-badge"><i class="fas fa-toolbox"></i> Fase 1</span>
-                    <span class="phase-name">A Preparação — Módulos 1 e 2</span>
-                    <span class="phase-progress-mini" id="mini-1"></span>
-                    <i class="fas fa-chevron-down phase-chevron"></i>
-                </div>
-                <div class="phase-body" id="body-1">
-                    <div class="days-grid">
-                        
-                        <div class="day-card">
-                            <div class="day-card-top">
-                                <div class="day-icon"><i class="fas fa-wrench"></i></div>
-                                <div><div class="day-num">Módulo 01</div><div class="day-title">O Kit de Ferramentas</div></div>
-                            </div>
-                            <p class="day-desc">O que você realmente precisa comprar (gastando pouco) e o que é puro desperdício de dinheiro para iniciantes.</p>
-                            <div class="card-actions">
-                                <a href="INSERIR_LINK_MODULO_1" class="btn-access" target="_blank">Acessar Aula</a>
-                                <button class="btn-complete toggle-btn" data-mod="1"><i class="far fa-circle"></i> Marcar Concluído</button>
-                            </div>
-                        </div>
-
-                        <div class="day-card">
-                            <div class="day-card-top">
-                                <div class="day-icon"><i class="fas fa-book-open"></i></div>
-                                <div><div class="day-num">Módulo 02</div><div class="day-title">Decifrando Manuais</div></div>
-                            </div>
-                            <p class="day-desc">O segredo para bater o olho em qualquer manual complexo e entender a ordem exata de montagem sem cometer erros.</p>
-                            <div class="card-actions">
-                                <a href="INSERIR_LINK_MODULO_2" class="btn-access" target="_blank">Acessar Aula</a>
-                                <button class="btn-complete toggle-btn" data-mod="2"><i class="far fa-circle"></i> Marcar Concluído</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- ── FASE 2: MÃO NA MASSA ── -->
-            <div class="phase-accordion">
-                <div class="phase-header" data-phase="2">
-                    <span class="phase-badge"><i class="fas fa-tools"></i> Fase 2</span>
-                    <span class="phase-name">A Prática — Módulo 3</span>
-                    <span class="phase-progress-mini" id="mini-2"></span>
-                    <i class="fas fa-chevron-down phase-chevron"></i>
-                </div>
-                <div class="phase-body" id="body-2">
-                    <div class="days-grid">
-
-                        <div class="day-card">
-                            <div class="day-card-top">
-                                <div class="day-icon"><i class="fas fa-hammer"></i></div>
-                                <div><div class="day-num">Módulo 03</div><div class="day-title">Técnicas de Montagem</div></div>
-                            </div>
-                            <p class="day-desc">O núcleo do curso: como alinhar portas, regular dobradiças, instalar corrediças e salvar peças que vieram tortas de fábrica.</p>
-                            <div class="card-actions">
-                                <a href="INSERIR_LINK_MODULO_3" class="btn-access" target="_blank">Acessar Aula</a>
-                                <button class="btn-complete toggle-btn" data-mod="3"><i class="far fa-circle"></i> Marcar Concluído</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- ── FASE 3: O NEGÓCIO ── -->
-            <div class="phase-accordion">
-                <div class="phase-header" data-phase="3">
-                    <span class="phase-badge"><i class="fas fa-hand-holding-usd"></i> Fase 3</span>
-                    <span class="phase-name">Clientes e Dinheiro — Módulos 4 e 5</span>
-                    <span class="phase-progress-mini" id="mini-3"></span>
-                    <i class="fas fa-chevron-down phase-chevron"></i>
-                </div>
-                <div class="phase-body" id="body-3">
-                    <div class="days-grid">
-
-                        <div class="day-card">
-                            <div class="day-card-top">
-                                <div class="day-icon"><i class="fas fa-users"></i></div>
-                                <div><div class="day-num">Módulo 04</div><div class="day-title">A Máquina de Atrair Clientes</div></div>
-                            </div>
-                            <p class="day-desc">Use o Facebook do bairro, OLX e WhatsApp para conseguir serviços logo na primeira semana, sem gastar com anúncios.</p>
-                            <div class="card-actions">
-                                <a href="INSERIR_LINK_MODULO_4" class="btn-access" target="_blank">Acessar Aula</a>
-                                <button class="btn-complete toggle-btn" data-mod="4"><i class="far fa-circle"></i> Marcar Concluído</button>
-                            </div>
-                        </div>
-
-                        <div class="day-card">
-                            <div class="day-card-top">
-                                <div class="day-icon"><i class="fas fa-calculator"></i></div>
-                                <div><div class="day-num">Módulo 05</div><div class="day-title">Precificação Perfeita</div></div>
-                            </div>
-                            <p class="day-desc">A tabela de preços 2025 para você nunca cobrar barato demais e tomar prejuízo, nem caro demais e perder o cliente.</p>
-                            <div class="card-actions">
-                                <a href="INSERIR_LINK_MODULO_5" class="btn-access" target="_blank">Acessar Aula</a>
-                                <button class="btn-complete toggle-btn" data-mod="5"><i class="far fa-circle"></i> Marcar Concluído</button>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- ── RECURSOS EXTRAS (BÔNUS) ── -->
-            <div class="extras-section">
-                <h2 class="section-title">O Aplicativo de Bolso <span>(Bônus)</span></h2>
-                <div class="extras-grid">
-
-                    <div class="extra-card">
-                        <div class="extra-icon"><i class="fas fa-money-bill-wave"></i></div>
-                        <div class="extra-tag">Ferramenta 1</div>
-                        <div class="extra-title">Calculadora Automática</div>
-                        <p class="extra-desc">Insira o tipo de móvel e o tamanho. O sistema te diz instantaneamente o valor ideal para cobrar pelo seu serviço.</p>
-                        <a href="INSERIR_LINK_APP_CALCULADORA" class="btn-extra" target="_blank">Abrir App</a>
-                    </div>
-
-                    <div class="extra-card">
-                        <div class="extra-icon"><i class="fas fa-file-invoice-dollar"></i></div>
-                        <div class="extra-tag">Ferramenta 2</div>
-                        <div class="extra-title">Gerador de Recibo</div>
-                        <p class="extra-desc">Passe mais profissionalismo enviando um recibo digital em PDF direto para o WhatsApp do cliente com apenas 1 clique.</p>
-                        <a href="INSERIR_LINK_APP_RECIBO" class="btn-extra" target="_blank">Abrir App</a>
-                    </div>
-
-                    <div class="extra-card">
-                        <div class="extra-icon"><i class="fas fa-calendar-check"></i></div>
-                        <div class="extra-tag">Ferramenta 3</div>
-                        <div class="extra-title">Agenda Inteligente</div>
-                        <p class="extra-desc">Organize seus horários do final de semana na palma da mão, evite encavalar clientes e controle seu faturamento do mês.</p>
-                        <a href="INSERIR_LINK_APP_AGENDA" class="btn-extra" target="_blank">Abrir App</a>
-                    </div>
-
-                </div>
-            </div>
-
-        </div><!-- /container -->
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>© 2026 Curso Montador de Móveis Pro. Todos os direitos reservados.</p>
+        <div class="pain-item">
+          <div class="pain-x">✕</div>
+          <p><strong>Grupos de apoio e terapia convencional</strong> — ajudam a consciência, mas não alcançam o subconsciente onde o gatilho está instalado. A luta continua mesmo com suporte.</p>
         </div>
-    </footer>
+        <div class="pain-item">
+          <div class="pain-x">✕</div>
+          <p><strong>Força de vontade pura</strong> — luta contra o consciente, mas a âncora emocional mora no subconsciente. É uma batalha desigual por natureza.</p>
+        </div>
+      </div>
 
-    <script>
-        // ==========================================
-        // AVISO DE LINKS NÃO CONFIGURADOS
-        // ==========================================
-        // Intercepta cliques nos links para avisar que precisa configurar a URL (caso tenha "INSERIR_LINK_")
-        document.addEventListener('click', function(e) {
-            const linkBtn = e.target.closest('.btn-access') || e.target.closest('.btn-extra');
-            if (linkBtn) {
-                if (linkBtn.getAttribute('href').includes('INSERIR_LINK_')) {
-                    e.preventDefault();
-                    alert("Aviso do Sistema: O link para este conteúdo ainda não foi configurado pelo administrador.");
-                }
-            }
-        });
+      <div class="truth-box">
+        <p>A ciência chama de <strong>"âncora emocional"</strong> — uma associação profunda entre o álcool e alívio, prazer ou pertencimento. Ela foi instalada no subconsciente ao longo de anos. Nenhum esforço consciente apaga uma âncora emocional. <strong>É preciso entrar na camada onde ela foi fixada.</strong></p>
+      </div>
+    </div>
+  </div>
 
-        // ==========================================
-        // SISTEMA DE PROGRESSO DOS 5 MÓDULOS
-        // ==========================================
-        const TOTAL_MODULES = 5;
-        const STORAGE_KEY = 'curso_montador_progress';
-        const PHASE_MODULES = { 1:[1,2], 2:[3], 3:[4,5] };
+  <!-- ── SEÇÃO 2: MECANISMO ÚNICO ── -->
+  <div class="sec">
+    <div class="wrap reveal">
+      <p class="sec-label">O mecanismo</p>
+      <h2 class="sec-title">Por que frequências<br><em>theta</em> soltam a âncora<br>onde tudo falhou</h2>
 
-        let progressData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      <div class="mec-intro">
+        <p class="mec-intro-label">Entenda antes de julgar</p>
+        <p>Seu cérebro opera em diferentes frequências ao longo do dia. No estado <strong style="color:var(--text)">Beta</strong> (acordado, pensando), ele está na defensiva — resistente a qualquer mudança. No estado <strong style="color:var(--gold)">Theta</strong> (entre o sono e a vigília), algo diferente acontece: o subconsciente fica completamente aberto. É nessa janela que memórias são formadas, hábitos são instalados — e onde o vício foi construído. É exatamente aí que o Método Âncora age.</p>
+      </div>
 
-        function updateMiniProgress() {
-            [1,2,3].forEach(function(phase) {
-                const mods = PHASE_MODULES[phase];
-                const done = mods.filter(function(m){ return progressData[m]; }).length;
-                const el = document.getElementById('mini-'+phase);
-                if (!el) return;
-                if (done === mods.length) { 
-                    el.textContent = '✓ Concluída'; 
-                    el.className = 'phase-progress-mini all-done'; 
-                } else { 
-                    el.textContent = done + '/' + mods.length + ' módulos'; 
-                    el.className = 'phase-progress-mini'; 
-                }
-            });
-        }
+      <div class="mec-blocks">
+        <div class="mec-block">
+          <div class="mec-num">1</div>
+          <div class="mec-content">
+            <h3>As frequências subliminals induzem o estado theta</h3>
+            <p>Os áudios usam camadas de frequências sonoras calibradas para desacelerar as ondas cerebrais de Beta para Theta — o mesmo estado que você entra naturalmente ao adormecer. Sem medicamento. Sem esforço. Você apenas ouve.</p>
+            <span class="highlight">15–22 minutos por sessão</span>
+          </div>
+        </div>
+        <div class="mec-block">
+          <div class="mec-num">2</div>
+          <div class="mec-content">
+            <h3>O subconsciente recebe a nova instrução</h3>
+            <p>Em estado theta, a "parede" de resistência do consciente baixa. As afirmações subliminals — abaixo do limiar perceptível — chegam direto onde a âncora "preciso beber para relaxar" foi fixada. Não é hipnose de show: é o mesmo princípio usado em terapias clínicas e treinamentos de alto desempenho.</p>
+            <span class="highlight">A instrução antiga é sobrescrita</span>
+          </div>
+        </div>
+        <div class="mec-block">
+          <div class="mec-num">3</div>
+          <div class="mec-content">
+            <h3>A vontade desaparece — sem supressão</h3>
+            <p>O impulso simplesmente deixa de existir. Você não resiste ao álcool — você perde o interesse por ele. Não é força de vontade — é a ausência da âncora. Isso é o que diferencia quem realmente se liberta de quem "está tentando parar".</p>
+            <span class="highlight">Sem abstinência forçada</span>
+          </div>
+        </div>
+        <div class="mec-block">
+          <div class="mec-num">4</div>
+          <div class="mec-content">
+            <h3>7 dias para consolidar a nova identidade</h3>
+            <p>Cada sessão cobre um aspecto diferente: o gatilho do estresse, o hábito social, a associação com celebração, o sono. Ao final do protocolo, você não se enxerga mais como alguém que precisa beber para se sentir bem — você simplesmente não precisa mais.</p>
+            <span class="highlight">Reprogramação progressiva</span>
+          </div>
+        </div>
+      </div>
 
-        function updateUI() {
-            let completed = 0;
-            for (let i = 1; i <= TOTAL_MODULES; i++) {
-                if (progressData[i]) completed++;
-                
-                // Círculos no mapa do topo
-                const circle = document.querySelector('.mod-circle[data-mod="'+i+'"]');
-                if (circle) circle.classList.toggle('completed', !!progressData[i]);
-                
-                // Botões de check nos cards
-                const btn = document.querySelector('.toggle-btn[data-mod="'+i+'"]');
-                if (btn) {
-                    btn.classList.toggle('is-completed', !!progressData[i]);
-                    btn.innerHTML = progressData[i]
-                        ? '<i class="fas fa-check-circle"></i> Concluído'
-                        : '<i class="far fa-circle"></i> Marcar Concluído';
-                    
-                    const card = btn.closest('.day-card');
-                    if(card) card.classList.toggle('is-done', !!progressData[i]);
-                }
-            }
-            
-            // Barra principal
-            const pct = Math.round((completed / TOTAL_MODULES) * 100);
-            document.getElementById('progress-text').textContent = pct + '%';
-            document.getElementById('progress-bar').style.width = pct + '%';
-            
-            updateMiniProgress();
-        }
+      <div class="science-note">
+        <div class="science-ico">🔬</div>
+        <p>O estado theta e sua relação com a plasticidade neural é documentado por pesquisadores do MIT e da Universidade de Stanford. Técnicas de reprogramação em frequências theta são usadas em protocolos de saúde mental, tratamento de fobias e programas de alta performance. <strong>O Método Âncora aplica esse princípio à dependência emocional do álcool.</strong></p>
+      </div>
+    </div>
+  </div>
 
-        // Evento dos botões "Marcar concluído"
-        document.addEventListener('click', function(e) {
-            const btn = e.target.closest('.toggle-btn');
-            if (!btn) return;
-            const mod = btn.getAttribute('data-mod');
-            progressData[mod] = !progressData[mod];
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(progressData));
-            updateUI();
-        });
+  <!-- ── SEÇÃO 3: COMPARATIVO ── -->
+  <div class="sec sec-dark">
+    <div class="wrap reveal">
+      <p class="sec-label">A diferença prática</p>
+      <h2 class="sec-title">O que muda quando você<br>solta a âncora na camada <em>certa</em></h2>
 
-        // Acordeão de Fases
-        document.querySelectorAll('.phase-header').forEach(function(header) {
-            header.addEventListener('click', function() {
-                const phase = header.getAttribute('data-phase');
-                const body = document.getElementById('body-'+phase);
-                const isOpen = header.classList.contains('open');
-                
-                // Fecha todos primeiro
-                document.querySelectorAll('.phase-header').forEach(function(h){ h.classList.remove('open'); });
-                document.querySelectorAll('.phase-body').forEach(function(b){ b.classList.remove('open'); });
-                
-                // Abre se não estava aberto
-                if (!isOpen) { header.classList.add('open'); body.classList.add('open'); }
-            });
-        });
+      <div class="compare-grid">
+        <div class="cmp-card bad">
+          <p class="cmp-label">Métodos comuns</p>
+          <div class="cmp-list">
+            <div class="cmp-item"><span class="cmp-ico">✕</span>Suprime o desejo de beber à força</div>
+            <div class="cmp-item"><span class="cmp-ico">✕</span>Exige esforço constante</div>
+            <div class="cmp-item"><span class="cmp-ico">✕</span>Altíssima taxa de recaída</div>
+            <div class="cmp-item"><span class="cmp-ico">✕</span>Irritabilidade e abstinência</div>
+            <div class="cmp-item"><span class="cmp-ico">✕</span>Não dissolve a âncora emocional</div>
+          </div>
+        </div>
+        <div class="cmp-card good">
+          <p class="cmp-label">Método Âncora</p>
+          <div class="cmp-list">
+            <div class="cmp-item"><span class="cmp-ico">✓</span>Solta a âncora na raiz</div>
+            <div class="cmp-item"><span class="cmp-ico">✓</span>Sem esforço consciente</div>
+            <div class="cmp-item"><span class="cmp-ico">✓</span>Mudança percebida em 2–3 dias</div>
+            <div class="cmp-item"><span class="cmp-ico">✓</span>Sem síndrome de abstinência severa</div>
+            <div class="cmp-item"><span class="cmp-ico">✓</span>Sem angústia social</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-        // Init
-        updateUI();
-    </script>
+  <!-- ── SEÇÃO 4: DEPOIMENTOS ── -->
+  <div class="sec">
+    <div class="wrap-wide reveal">
+      <p class="sec-label">Prova social</p>
+      <h2 class="sec-title">Eles também achavam<br>que era <em>papo de marketing</em></h2>
+      <p class="sec-body">Três histórias de pessoas que chegaram céticas e saíram livres.</p>
+
+      <div class="testi-grid">
+        <div class="testi">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Fui com desconfiança total. No terceiro dia, minha filha me ligou e disse que eu parecia diferente. Eu nem tinha percebido que não tinha bebido nada naquela semana. A vontade simplesmente foi embora."</p>
+          <div class="testi-author">
+            <div class="testi-av">M</div>
+            <div><div class="testi-name">Marcia T.</div><div class="testi-detail">Livre há 5 meses · 14 anos bebendo todo fim de semana</div></div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Já tinha tentado terapia, grupos de apoio, aplicativos de controle. Nada durava. Com o Âncora foi diferente — não foi uma luta. O álcool foi perdendo o apelo aos poucos, como se eu estivesse simplesmente perdendo o interesse."</p>
+          <div class="testi-author">
+            <div class="testi-av">R</div>
+            <div><div class="testi-name">Rafael O.</div><div class="testi-detail">Livre há 4 meses · 6 tentativas anteriores</div></div>
+          </div>
+        </div>
+        <div class="testi">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Meu maior medo era ficar de fora nas festas e reuniões. Mas simplesmente deixei de sentir essa pressão. Bebo água, me divirto igual, e ninguém nem percebe. Parece que nunca precisei do álcool pra me soltar."</p>
+          <div class="testi-author">
+            <div class="testi-av">C</div>
+            <div><div class="testi-name">Carla D.</div><div class="testi-detail">Livre há 2 meses · Bebia todo final de semana há 9 anos</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEÇÃO 5: GARANTIA ── -->
+  <div class="sec sec-dark">
+    <div class="wrap reveal">
+      <p class="sec-label">Risco zero</p>
+      <h2 class="sec-title">Teste. Se não funcionar,<br><em>devolvemos tudo.</em></h2>
+      <p class="sec-body">Antes de ver o preço, você precisa saber disso:</p>
+
+      <div class="guarantee">
+        <div class="guar-ico">🛡️</div>
+        <div>
+          <div class="guar-title">Garantia incondicional de 7 dias</div>
+          <p class="guar-body">Acesse o protocolo completo. Ouça os primeiros 3 dias de áudio. Se ao final do 3º dia você ainda sentir o mesmo impulso incontrolável de beber que sente hoje — devolvemos 100% do valor, sem perguntas, sem burocracia. Você fica com o acesso e nós ficamos com o prejuízo. O risco é completamente nosso. Você não tem nada a perder além da âncora.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEÇÃO 6: OFERTA ── -->
+  <div class="sec">
+    <div class="wrap reveal">
+      <div class="offer-box">
+        <div class="offer-badge">Acesso liberado · Tempo limitado</div>
+        <h2 class="offer-title">Protocolo Completo de 7 Dias</h2>
+
+        <div class="price-from">De R$ 27,00 por apenas</div>
+        <div class="price-main"><sup>R$</sup>16<span>,90</span></div>
+        <p class="price-note">Menos que uma rodada de bebidas. Acesso para sempre.</p>
+
+        <div class="includes">
+          <div class="inc-item"><span class="inc-chk">✓</span><span><strong>7 sessões de frequências theta subliminals</strong> — uma por dia, progressivas</span></div>
+          <div class="inc-item"><span class="inc-chk">✓</span><span><strong>Áudio SOS</strong> — acionado nos momentos de impulso agudo</span></div>
+          <div class="inc-item"><span class="inc-chk">✓</span><span><strong>Reprogramação Noturna</strong> — 45 min para ouvir enquanto dorme</span></div>
+          <div class="inc-item"><span class="inc-chk">✓</span><span><strong>Ebook: A ciência por trás do método</strong> — entenda como a âncora emocional funciona no seu cérebro</span></div>
+          <div class="inc-item"><span class="inc-chk">✓</span><span><strong>Calculadora de economia</strong> — veja quanto você vai economizar sem o álcool</span></div>
+        </div>
+
+        <a href="https://www.ggcheckout.com/checkout/v4/GimLqOi9HnEbfUSXcf2h" class="btn-cta">Quero Meu Acesso Agora — R$ 16,90</a>
+        <span class="btn-sub">🔒 Pagamento seguro · Garantia de 7 dias · Acesso em 2 minutos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEÇÃO 7: FAQ ── -->
+  <div class="sec sec-dark">
+    <div class="wrap reveal">
+      <p class="sec-label">Dúvidas frequentes</p>
+      <h2 class="sec-title">As perguntas que você<br>ainda <em>não fez</em></h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <button class="faq-q">Subliminal realmente funciona para dependência de álcool? <span class="faq-arr">+</span></button>
+          <div class="faq-a">Boa pergunta — é exatamente o ceticismo que esperamos. Subliminal não é mágica: é o envio de informação abaixo do limiar consciente de percepção, enquanto o cérebro está em estado receptivo (theta). A dependência emocional do álcool vive no subconsciente — e é exatamente lá que as frequências theta chegam, sem a resistência do consciente. A hipnose clínica usa o mesmo princípio e é reconhecida pela Associação Médica Americana desde 1958.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">E se eu bebo há muitos anos? Ainda funciona? <span class="faq-arr">+</span></button>
+          <div class="faq-a">Sim — e é justamente para quem bebe há anos que o protocolo foi estruturado. Quanto mais tempo a âncora está instalada, mais automático é o comportamento. Mas o estado theta ignora esse tempo: ele acessa o padrão independente de quando foi criado. A dependência química do álcool diminui em dias. O que permanece é a âncora emocional — e é exatamente o que o protocolo dissolve.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Vou ter síndrome de abstinência ou ficar de fora socialmente? <span class="faq-arr">+</span></button>
+          <div class="faq-a">Abstinência severa acontece em casos de dependência física intensa — se esse for seu caso, recomendamos acompanhamento médico paralelo. Para a maioria, o que causa desconforto é a âncora emocional, não a química. Quando a âncora é solta, não há tensão para compensar. Socialmente, você vai perceber que não precisa do álcool para se divertir ou se encaixar — a pressão simplesmente some.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Preciso de fone de ouvido? <span class="faq-arr">+</span></button>
+          <div class="faq-a">Recomendamos fones estéreo para máxima eficácia — as frequências são espacializadas para induzir o estado theta com mais precisão. Mas o protocolo funciona também pelo alto-falante do celular em ambiente tranquilo, sem barulho externo.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Quando vou sentir o primeiro resultado? <span class="faq-arr">+</span></button>
+          <div class="faq-a">A maioria relata uma mudança sutil já após a primeira sessão: uma sensação de calma diferente, menor urgência diante do álcool. Entre o 2º e o 3º dia, muitos descrevem a bebida como algo que "perdeu o apelo" — como se o brilho tivesse sumido. A reprogramação completa se consolida ao longo dos 7 dias.</div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Como acesso após a compra? <span class="faq-arr">+</span></button>
+          <div class="faq-a">O acesso é imediato. Após o pagamento, você recebe o link da plataforma por e-mail. Funciona em celular, tablet ou computador — sem instalar nada. Você pode começar na mesma noite.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEÇÃO 8: FINAL CTA ── -->
+  <div class="final-hero">
+    <div class="wrap reveal">
+      <p class="sec-label">Sua decisão</p>
+      <h2 class="sec-title" style="font-family:'Cormorant Garamond',serif">Você pode continuar<br>tentando com força<br>de vontade.<br><em>Ou pode ir pela raiz.</em></h2>
+      <p style="color:#888;font-size:14px;margin:20px 0 36px;max-width:400px;margin-left:auto;margin-right:auto">R$ 16,90. Garantia de 7 dias. Acesso em 2 minutos. O risco é zero — a âncora que você vai soltar é que é tudo.</p>
+      <div style="max-width:420px;margin:0 auto">
+        <a href="https://www.ggcheckout.com/checkout/v4/GimLqOi9HnEbfUSXcf2h" class="btn-cta">Quero Me Libertar Agora</a>
+        <span class="btn-sub">🔒 Pagamento seguro · Acesso imediato · Garantia incondicional de 7 dias</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /lp-wrap -->
+
+<!-- STICKY -->
+<div class="sticky" id="sticky">
+  <div class="sticky-left">
+    Acesso completo por<strong>R$ 16,90</strong>
+  </div>
+  <a href="https://www.ggcheckout.com/checkout/v4/GimLqOi9HnEbfUSXcf2h" class="btn-cta">Garantir agora →</a>
+</div>
+
+<script>
+// ─── STATE ───
+let uName = '';
+let cur = -1;
+const TOTAL = 4;
+const ans = {};
+
+// ─── PROGRESS ───
+function updProg(idx) {
+  const pct = Math.round((idx / TOTAL) * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progPct').textContent = pct + '%';
+  document.getElementById('progLabel').textContent =
+    idx < TOTAL ? `Etapa ${idx + 1} de ${TOTAL}` : 'Análise completa';
+}
+
+// ─── NAME ───
+function handleName() {
+  const inp = document.getElementById('userName');
+  const v = inp.value.trim();
+  if (!v) { inp.focus(); inp.style.borderColor = 'var(--danger)'; return; }
+  uName = v.charAt(0).toUpperCase() + v.slice(1);
+  document.getElementById('ls3txt').textContent = 'Calibrando protocolo para ' + uName + '…';
+  document.getElementById('sl-name').classList.remove('on');
+  document.getElementById('progWrap').style.display = '';
+  goSlide(0);
+  updProg(0);
+}
+
+// ─── OPTIONS ───
+document.querySelectorAll('.opt').forEach(opt => {
+  opt.addEventListener('click', function() {
+    const s = this.dataset.s;
+    document.querySelectorAll('.opt[data-s="' + s + '"]').forEach(o => o.classList.remove('sel'));
+    this.classList.add('sel');
+    ans[s] = this.dataset.v;
+    const btn = document.getElementById('nx-' + s);
+    if (btn) {
+      btn.classList.add('show');
+      setTimeout(() => btn.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+    }
+  });
+});
+
+// ─── NEXT ───
+for (let i = 0; i < TOTAL; i++) {
+  const btn = document.getElementById('nx-' + i);
+  if (!btn) continue;
+  btn.addEventListener('click', (function(idx) {
+    return function() {
+      if (!ans[idx]) return;
+      document.getElementById('sl-' + idx).classList.remove('on');
+      cur = idx + 1;
+      if (cur < TOTAL) {
+        goSlide(cur);
+        updProg(cur);
+        setTimeout(() => {
+          const ns = document.getElementById('sl-' + cur);
+          if (ns) ns.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      } else {
+        startLoad();
+      }
+    };
+  })(i));
+}
+
+function goSlide(idx) {
+  const el = document.getElementById('sl-' + idx);
+  if (el) el.classList.add('on');
+}
+
+// ─── LOADING ───
+function startLoad() {
+  document.getElementById('quiz-wrap').classList.add('hidden');
+  document.getElementById('loading-wrap').classList.remove('hidden');
+  updProg(TOTAL);
+  window.scrollTo(0, 0);
+
+  ['ls1','ls2','ls3','ls4'].forEach((id, i) => {
+    setTimeout(() => {
+      document.getElementById(id).classList.add('done');
+      if (i === 3) setTimeout(showSelected, 850);
+    }, 500 + i * 650);
+  });
+}
+
+// ─── TELA DE SELEÇÃO ───
+function showSelected() {
+  document.getElementById('loading-wrap').classList.add('hidden');
+  const screen = document.getElementById('selected-screen');
+  screen.classList.add('on');
+  window.scrollTo(0, 0);
+
+  // Anima número aleatório entre 3 e 11 para dar sensação de disputa
+  const finalNum = Math.floor(Math.random() * 9) + 3;
+  let n = 1;
+  const tick = setInterval(() => {
+    document.getElementById('selNum').textContent = n;
+    n++;
+    if (n > finalNum) clearInterval(tick);
+  }, 120);
+
+  // Barra de progresso animada
+  setTimeout(() => {
+    document.getElementById('selBarFill').style.width = '100%';
+  }, 100);
+
+  // Após 3.2s vai pra LP
+  setTimeout(showLP, 5500);
+}
+
+// ─── SHOW LP ───
+function showLP() {
+  document.getElementById('selected-screen').classList.remove('on');
+  // Personalizar hero com o nome
+  const heroTitle = document.getElementById('heroTitle');
+  if (heroTitle && uName) {
+    heroTitle.innerHTML = uName + ', seu cérebro<br>ainda acredita que <em>precisa</em><br>do álcool.';
+  }
+  document.getElementById('lp-wrap').style.display = 'block';
+  window.scrollTo(0, 0);
+  initReveal();
+}
+
+// ─── SCROLL REVEAL ───
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+  }, { threshold: 0.07 });
+  els.forEach(el => io.observe(el));
+}
+
+// ─── FAQ ───
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!open) item.classList.add('open');
+  });
+});
+
+// ─── STICKY ───
+window.addEventListener('scroll', () => {
+  const s = document.getElementById('sticky');
+  if (!s) return;
+  s.classList.toggle('on', window.scrollY > 500);
+});
+
+// init
+document.getElementById('progWrap').style.display = 'none';
+</script>
 </body>
 </html>
